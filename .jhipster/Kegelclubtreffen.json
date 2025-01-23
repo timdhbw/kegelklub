@@ -1,0 +1,42 @@
+{
+  "angularJSSuffix": "FrontendDo",
+  "annotations": {
+    "changelogDate": "20250123131641"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "zeitpunkt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dauer",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "treffpunkt",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Kegelclubtreffen",
+  "relationships": [
+    {
+      "otherEntityName": "bild",
+      "otherEntityRelationshipName": "treffen",
+      "relationshipName": "bild",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "wurfErgebnis",
+      "otherEntityRelationshipName": "kegelclubtreffen",
+      "relationshipName": "wurfErgebnis",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

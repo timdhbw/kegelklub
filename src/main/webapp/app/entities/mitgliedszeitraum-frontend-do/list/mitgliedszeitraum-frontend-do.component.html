@@ -1,0 +1,113 @@
+<div>
+  <h2 id="page-heading" data-cy="MitgliedszeitraumHeading">
+    <span jhiTranslate="kegelclubApp.mitgliedszeitraum.home.title">Mitgliedszeitraums</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kegelclubApp.mitgliedszeitraum.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-mitgliedszeitraum-frontend-do"
+        [routerLink]="['/mitgliedszeitraum-frontend-do/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kegelclubApp.mitgliedszeitraum.home.createLabel">Mitgliedszeitraum erstellen</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (mitgliedszeitraums().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kegelclubApp.mitgliedszeitraum.home.notFound">Keine Mitgliedszeitraums gefunden</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startMitgliedschaft">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.mitgliedszeitraum.startMitgliedschaft">Start Mitgliedschaft</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endeMitgliedschaft">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.mitgliedszeitraum.endeMitgliedschaft">Ende Mitgliedschaft</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="kegler.id">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.mitgliedszeitraum.kegler">Kegler</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (mitgliedszeitraum of mitgliedszeitraums(); track trackId(mitgliedszeitraum)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/mitgliedszeitraum-frontend-do', mitgliedszeitraum.id, 'view']">{{ mitgliedszeitraum.id }}</a>
+              </td>
+              <td>{{ mitgliedszeitraum.startMitgliedschaft | formatMediumDate }}</td>
+              <td>{{ mitgliedszeitraum.endeMitgliedschaft | formatMediumDate }}</td>
+              <td>
+                @if (mitgliedszeitraum.kegler) {
+                  <div>
+                    <a [routerLink]="['/kegler-frontend-do', mitgliedszeitraum.kegler.id, 'view']">{{ mitgliedszeitraum.kegler.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/mitgliedszeitraum-frontend-do', mitgliedszeitraum.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/mitgliedszeitraum-frontend-do', mitgliedszeitraum.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(mitgliedszeitraum)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

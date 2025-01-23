@@ -1,0 +1,45 @@
+
+entity Kegelclubtreffen {
+	zeitpunkt Instant required
+    dauer Integer
+    treffpunkt String required
+
+}
+
+entity Bild {
+	bildbeschreibung String
+  typ String
+    erstellung Instant required
+    bild ImageBlob required
+}
+
+entity Kegler {
+	name String required
+}
+
+entity Mitgliedszeitraum {
+	startMitgliedschaft LocalDate required
+    endeMitgliedschaft LocalDate
+}
+
+entity WurfErgebnis {
+	anzahlWuerfe Integer required
+    gesamtpunktzahl Integer required
+    pudel Integer required
+    neuner Integer required
+    kraenze Integer required
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Kegelclubtreffen to Bild{treffen}
+    Kegler to Mitgliedszeitraum{kegler}
+    Kegler to WurfErgebnis{kegler required}
+    Kegelclubtreffen to WurfErgebnis{kegelclubtreffen required}
+}
+
+// Set service options to all except few
+service all with serviceImpl except Mitgliedszeitraum, Bild
+
+// Set an angular suffix
+angularSuffix * with FrontendDo

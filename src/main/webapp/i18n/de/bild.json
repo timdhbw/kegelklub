@@ -1,0 +1,28 @@
+{
+  "kegelclubApp": {
+    "bild": {
+      "home": {
+        "title": "Bilds",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Bild erstellen",
+        "createOrEditLabel": "Bild erstellen oder bearbeiten",
+        "notFound": "Keine Bilds gefunden"
+      },
+      "created": "Bild erstellt mit ID {{ param }}",
+      "updated": "Bild aktualisiert mit ID {{ param }}",
+      "deleted": "Bild gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Bild {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Bild"
+      },
+      "id": "ID",
+      "bildbeschreibung": "Bildbeschreibung",
+      "typ": "Typ",
+      "erstellung": "Erstellung",
+      "bild": "Bild",
+      "treffen": "Treffen"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-mitgliedszeitraum-frontend-do-heading"
+        data-cy="MitgliedszeitraumCreateUpdateHeading"
+        jhiTranslate="kegelclubApp.mitgliedszeitraum.home.createOrEditLabel"
+      >
+        Mitgliedszeitraum erstellen oder bearbeiten
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kegelclubApp.mitgliedszeitraum.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let startMitgliedschaftRef = editForm.get('startMitgliedschaft')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_startMitgliedschaft" jhiTranslate="kegelclubApp.mitgliedszeitraum.startMitgliedschaft"
+            >Start Mitgliedschaft</label
+          >
+          <div class="input-group">
+            <input
+              id="field_startMitgliedschaft"
+              data-cy="startMitgliedschaft"
+              type="text"
+              class="form-control"
+              name="startMitgliedschaft"
+              ngbDatepicker
+              #startMitgliedschaftDp="ngbDatepicker"
+              formControlName="startMitgliedschaft"
+            />
+            <button type="button" class="btn btn-secondary" (click)="startMitgliedschaftDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (startMitgliedschaftRef.invalid && (startMitgliedschaftRef.dirty || startMitgliedschaftRef.touched)) {
+            <div>
+              @if (editForm.get('startMitgliedschaft')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endeMitgliedschaft" jhiTranslate="kegelclubApp.mitgliedszeitraum.endeMitgliedschaft"
+            >Ende Mitgliedschaft</label
+          >
+          <div class="input-group">
+            <input
+              id="field_endeMitgliedschaft"
+              data-cy="endeMitgliedschaft"
+              type="text"
+              class="form-control"
+              name="endeMitgliedschaft"
+              ngbDatepicker
+              #endeMitgliedschaftDp="ngbDatepicker"
+              formControlName="endeMitgliedschaft"
+            />
+            <button type="button" class="btn btn-secondary" (click)="endeMitgliedschaftDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_kegler" jhiTranslate="kegelclubApp.mitgliedszeitraum.kegler">Kegler</label>
+          <select
+            class="form-control"
+            id="field_kegler"
+            data-cy="kegler"
+            name="kegler"
+            formControlName="kegler"
+            [compareWith]="compareKeglerFrontendDo"
+          >
+            <option [ngValue]="null"></option>
+            @for (keglerOption of keglersSharedCollection; track $index) {
+              <option [ngValue]="keglerOption">{{ keglerOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Abbrechen</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Speichern</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

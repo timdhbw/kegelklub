@@ -1,0 +1,30 @@
+{
+  "kegelclubApp": {
+    "wurfErgebnis": {
+      "home": {
+        "title": "Wurf Ergebnis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Wurf Ergebnis",
+        "createOrEditLabel": "Create or edit a Wurf Ergebnis",
+        "notFound": "No Wurf Ergebnis found"
+      },
+      "created": "A new Wurf Ergebnis is created with identifier {{ param }}",
+      "updated": "A Wurf Ergebnis is updated with identifier {{ param }}",
+      "deleted": "A Wurf Ergebnis is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wurf Ergebnis {{ id }}?"
+      },
+      "detail": {
+        "title": "Wurf Ergebnis"
+      },
+      "id": "ID",
+      "anzahlWuerfe": "Anzahl Wuerfe",
+      "gesamtpunktzahl": "Gesamtpunktzahl",
+      "pudel": "Pudel",
+      "neuner": "Neuner",
+      "kraenze": "Kraenze",
+      "kegler": "Kegler",
+      "kegelclubtreffen": "Kegelclubtreffen"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (wurfErgebnis(); as wurfErgebnisRef) {
+      <div>
+        <h2 data-cy="wurfErgebnisDetailsHeading"><span jhiTranslate="kegelclubApp.wurfErgebnis.detail.title">Wurf Ergebnis</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ wurfErgebnisRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.anzahlWuerfe">Anzahl Wuerfe</span></dt>
+          <dd>
+            <span>{{ wurfErgebnisRef.anzahlWuerfe }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.gesamtpunktzahl">Gesamtpunktzahl</span></dt>
+          <dd>
+            <span>{{ wurfErgebnisRef.gesamtpunktzahl }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.pudel">Pudel</span></dt>
+          <dd>
+            <span>{{ wurfErgebnisRef.pudel }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.neuner">Neuner</span></dt>
+          <dd>
+            <span>{{ wurfErgebnisRef.neuner }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.kraenze">Kraenze</span></dt>
+          <dd>
+            <span>{{ wurfErgebnisRef.kraenze }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.kegler">Kegler</span></dt>
+          <dd>
+            @if (wurfErgebnis()!.kegler) {
+              <div>
+                <a [routerLink]="['/kegler-frontend-do', wurfErgebnis()!.kegler?.id, 'view']">{{ wurfErgebnisRef.kegler?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.wurfErgebnis.kegelclubtreffen">Kegelclubtreffen</span></dt>
+          <dd>
+            @if (wurfErgebnis()!.kegelclubtreffen) {
+              <div>
+                <a [routerLink]="['/kegelclubtreffen-frontend-do', wurfErgebnis()!.kegelclubtreffen?.id, 'view']">{{
+                  wurfErgebnisRef.kegelclubtreffen?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Zurück</span>
+        </button>
+
+        <button type="button" [routerLink]="['/wurf-ergebnis-frontend-do', wurfErgebnisRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Bearbeiten</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

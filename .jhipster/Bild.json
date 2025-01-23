@@ -1,0 +1,37 @@
+{
+  "angularJSSuffix": "FrontendDo",
+  "annotations": {
+    "changelogDate": "20250123131640"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "bildbeschreibung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typ",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "erstellung",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "bild",
+      "fieldType": "ImageBlob",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Bild",
+  "relationships": [
+    {
+      "otherEntityName": "kegelclubtreffen",
+      "relationshipName": "treffen",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

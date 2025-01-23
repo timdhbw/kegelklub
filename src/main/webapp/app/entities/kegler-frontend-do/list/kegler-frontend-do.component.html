@@ -1,0 +1,84 @@
+<div>
+  <h2 id="page-heading" data-cy="KeglerHeading">
+    <span jhiTranslate="kegelclubApp.kegler.home.title">Keglers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kegelclubApp.kegler.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-kegler-frontend-do"
+        [routerLink]="['/kegler-frontend-do/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kegelclubApp.kegler.home.createLabel">Kegler erstellen</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (keglers().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kegelclubApp.kegler.home.notFound">Keine Keglers gefunden</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.kegler.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (kegler of keglers(); track trackId(kegler)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/kegler-frontend-do', kegler.id, 'view']">{{ kegler.id }}</a>
+              </td>
+              <td>{{ kegler.name }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/kegler-frontend-do', kegler.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+                  </a>
+
+                  <a [routerLink]="['/kegler-frontend-do', kegler.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(kegler)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

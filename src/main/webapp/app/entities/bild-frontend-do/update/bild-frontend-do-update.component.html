@@ -1,0 +1,142 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-bild-frontend-do-heading" data-cy="BildCreateUpdateHeading" jhiTranslate="kegelclubApp.bild.home.createOrEditLabel">
+        Bild erstellen oder bearbeiten
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kegelclubApp.bild.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bildbeschreibung" jhiTranslate="kegelclubApp.bild.bildbeschreibung">Bildbeschreibung</label>
+          <input
+            type="text"
+            class="form-control"
+            name="bildbeschreibung"
+            id="field_bildbeschreibung"
+            data-cy="bildbeschreibung"
+            formControlName="bildbeschreibung"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typ" jhiTranslate="kegelclubApp.bild.typ">Typ</label>
+          <input type="text" class="form-control" name="typ" id="field_typ" data-cy="typ" formControlName="typ" />
+        </div>
+
+        @let erstellungRef = editForm.get('erstellung')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_erstellung" jhiTranslate="kegelclubApp.bild.erstellung">Erstellung</label>
+          <div class="d-flex">
+            <input
+              id="field_erstellung"
+              data-cy="erstellung"
+              type="datetime-local"
+              class="form-control"
+              name="erstellung"
+              formControlName="erstellung"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (erstellungRef.invalid && (erstellungRef.dirty || erstellungRef.touched)) {
+            <div>
+              @if (editForm.get('erstellung')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('erstellung')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >Dieses Feld muss eine Datums- und Zeitangabe enthalten.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let bildRef = editForm.get('bild')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bild" jhiTranslate="kegelclubApp.bild.bild">Bild</label>
+          <div>
+            @if (bildRef.value) {
+              <img
+                [src]="'data:' + editForm.get('bildContentType')!.value + ';base64,' + bildRef.value"
+                style="max-height: 100px"
+                alt="bild"
+              />
+            }
+            @if (bildRef.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('bildContentType')!.value }}, {{ byteSize(bildRef.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('bild', 'bildContentType', 'file_bild')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_bild"
+              data-cy="bild"
+              (change)="setFileData($event, 'bild', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="bild" id="field_bild" data-cy="bild" formControlName="bild" />
+          <input type="hidden" class="form-control" name="bildContentType" id="field_bildContentType" formControlName="bildContentType" />
+          @if (bildRef.invalid && (bildRef.dirty || bildRef.touched)) {
+            <div>
+              @if (editForm.get('bild')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_treffen" jhiTranslate="kegelclubApp.bild.treffen">Treffen</label>
+          <select
+            class="form-control"
+            id="field_treffen"
+            data-cy="treffen"
+            name="treffen"
+            formControlName="treffen"
+            [compareWith]="compareKegelclubtreffenFrontendDo"
+          >
+            <option [ngValue]="null"></option>
+            @for (kegelclubtreffenOption of kegelclubtreffensSharedCollection; track $index) {
+              <option [ngValue]="kegelclubtreffenOption">{{ kegelclubtreffenOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Abbrechen</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Speichern</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

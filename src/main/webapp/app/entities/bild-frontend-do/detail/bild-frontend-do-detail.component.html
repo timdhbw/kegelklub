@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (bild(); as bildRef) {
+      <div>
+        <h2 data-cy="bildDetailsHeading"><span jhiTranslate="kegelclubApp.bild.detail.title">Bild</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bildRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.bild.bildbeschreibung">Bildbeschreibung</span></dt>
+          <dd>
+            <span>{{ bildRef.bildbeschreibung }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.bild.typ">Typ</span></dt>
+          <dd>
+            <span>{{ bildRef.typ }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.bild.erstellung">Erstellung</span></dt>
+          <dd>
+            <span>{{ bildRef.erstellung | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.bild.bild">Bild</span></dt>
+          <dd>
+            @if (bildRef.bild) {
+              <div>
+                <a (click)="openFile(bildRef.bild, bildRef.bildContentType)">
+                  <img [src]="'data:' + bildRef.bildContentType + ';base64,' + bildRef.bild" style="max-width: 100%" alt="bild" />
+                </a>
+                {{ bildRef.bildContentType }}, {{ byteSize(bildRef.bild) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kegelclubApp.bild.treffen">Treffen</span></dt>
+          <dd>
+            @if (bild()!.treffen) {
+              <div>
+                <a [routerLink]="['/kegelclubtreffen-frontend-do', bild()!.treffen?.id, 'view']">{{ bildRef.treffen?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Zurück</span>
+        </button>
+
+        <button type="button" [routerLink]="['/bild-frontend-do', bildRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Bearbeiten</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

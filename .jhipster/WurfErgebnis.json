@@ -1,0 +1,53 @@
+{
+  "angularJSSuffix": "FrontendDo",
+  "annotations": {
+    "changelogDate": "20250123131644"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "anzahlWuerfe",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "gesamtpunktzahl",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pudel",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "neuner",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "kraenze",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "WurfErgebnis",
+  "relationships": [
+    {
+      "otherEntityName": "kegler",
+      "relationshipName": "kegler",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "kegelclubtreffen",
+      "relationshipName": "kegelclubtreffen",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

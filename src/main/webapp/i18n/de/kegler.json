@@ -1,0 +1,26 @@
+{
+  "kegelclubApp": {
+    "kegler": {
+      "home": {
+        "title": "Keglers",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Kegler erstellen",
+        "createOrEditLabel": "Kegler erstellen oder bearbeiten",
+        "notFound": "Keine Keglers gefunden"
+      },
+      "created": "Kegler erstellt mit ID {{ param }}",
+      "updated": "Kegler aktualisiert mit ID {{ param }}",
+      "deleted": "Kegler gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Kegler {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Kegler"
+      },
+      "id": "ID",
+      "name": "Name",
+      "mitgliedszeitraum": "Mitgliedszeitraum",
+      "wurfErgebnis": "Wurf Ergebnis"
+    }
+  }
+}

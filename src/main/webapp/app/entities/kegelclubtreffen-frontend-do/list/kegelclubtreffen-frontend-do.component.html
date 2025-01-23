@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="KegelclubtreffenHeading">
+    <span jhiTranslate="kegelclubApp.kegelclubtreffen.home.title">Kegelclubtreffens</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kegelclubApp.kegelclubtreffen.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-kegelclubtreffen-frontend-do"
+        [routerLink]="['/kegelclubtreffen-frontend-do/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kegelclubApp.kegelclubtreffen.home.createLabel">Kegelclubtreffen erstellen</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (kegelclubtreffens().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kegelclubApp.kegelclubtreffen.home.notFound">Keine Kegelclubtreffens gefunden</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="zeitpunkt">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.kegelclubtreffen.zeitpunkt">Zeitpunkt</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dauer">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.kegelclubtreffen.dauer">Dauer</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="treffpunkt">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.kegelclubtreffen.treffpunkt">Treffpunkt</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (kegelclubtreffen of kegelclubtreffens(); track trackId(kegelclubtreffen)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/kegelclubtreffen-frontend-do', kegelclubtreffen.id, 'view']">{{ kegelclubtreffen.id }}</a>
+              </td>
+              <td>{{ kegelclubtreffen.zeitpunkt | formatMediumDatetime }}</td>
+              <td>{{ kegelclubtreffen.dauer }}</td>
+              <td>{{ kegelclubtreffen.treffpunkt }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/kegelclubtreffen-frontend-do', kegelclubtreffen.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/kegelclubtreffen-frontend-do', kegelclubtreffen.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(kegelclubtreffen)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

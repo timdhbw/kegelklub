@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="BildHeading">
+    <span jhiTranslate="kegelclubApp.bild.home.title">Bilds</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kegelclubApp.bild.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bild-frontend-do"
+        [routerLink]="['/bild-frontend-do/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kegelclubApp.bild.home.createLabel">Bild erstellen</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (bilds().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kegelclubApp.bild.home.notFound">Keine Bilds gefunden</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bildbeschreibung">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.bild.bildbeschreibung">Bildbeschreibung</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typ">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.bild.typ">Typ</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="erstellung">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.bild.erstellung">Erstellung</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bild">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.bild.bild">Bild</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="treffen.id">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.bild.treffen">Treffen</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (bild of bilds(); track trackId(bild)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/bild-frontend-do', bild.id, 'view']">{{ bild.id }}</a>
+              </td>
+              <td>{{ bild.bildbeschreibung }}</td>
+              <td>{{ bild.typ }}</td>
+              <td>{{ bild.erstellung | formatMediumDatetime }}</td>
+              <td>
+                @if (bild.bild) {
+                  <a (click)="openFile(bild.bild, bild.bildContentType)">
+                    <img [src]="'data:' + bild.bildContentType + ';base64,' + bild.bild" style="max-height: 30px" alt="bild" />
+                  </a>
+                  <span>{{ bild.bildContentType }}, {{ byteSize(bild.bild) }}</span>
+                }
+              </td>
+              <td>
+                @if (bild.treffen) {
+                  <div>
+                    <a [routerLink]="['/kegelclubtreffen-frontend-do', bild.treffen.id, 'view']">{{ bild.treffen.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/bild-frontend-do', bild.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+                  </a>
+
+                  <a [routerLink]="['/bild-frontend-do', bild.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(bild)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,28 @@
+{
+  "angularJSSuffix": "FrontendDo",
+  "annotations": {
+    "changelogDate": "20250123131643"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "startMitgliedschaft",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endeMitgliedschaft",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Mitgliedszeitraum",
+  "relationships": [
+    {
+      "otherEntityName": "kegler",
+      "relationshipName": "kegler",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

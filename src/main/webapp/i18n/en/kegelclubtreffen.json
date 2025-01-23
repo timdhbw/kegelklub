@@ -1,0 +1,28 @@
+{
+  "kegelclubApp": {
+    "kegelclubtreffen": {
+      "home": {
+        "title": "Kegelclubtreffens",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Kegelclubtreffen",
+        "createOrEditLabel": "Create or edit a Kegelclubtreffen",
+        "notFound": "No Kegelclubtreffens found"
+      },
+      "created": "A new Kegelclubtreffen is created with identifier {{ param }}",
+      "updated": "A Kegelclubtreffen is updated with identifier {{ param }}",
+      "deleted": "A Kegelclubtreffen is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Kegelclubtreffen {{ id }}?"
+      },
+      "detail": {
+        "title": "Kegelclubtreffen"
+      },
+      "id": "ID",
+      "zeitpunkt": "Zeitpunkt",
+      "dauer": "Dauer",
+      "treffpunkt": "Treffpunkt",
+      "bild": "Bild",
+      "wurfErgebnis": "Wurf Ergebnis"
+    }
+  }
+}

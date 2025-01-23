@@ -1,0 +1,33 @@
+{
+  "angularJSSuffix": "FrontendDo",
+  "annotations": {
+    "changelogDate": "20250123131642"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Kegler",
+  "relationships": [
+    {
+      "otherEntityName": "mitgliedszeitraum",
+      "otherEntityRelationshipName": "kegler",
+      "relationshipName": "mitgliedszeitraum",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "wurfErgebnis",
+      "otherEntityRelationshipName": "kegler",
+      "relationshipName": "wurfErgebnis",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

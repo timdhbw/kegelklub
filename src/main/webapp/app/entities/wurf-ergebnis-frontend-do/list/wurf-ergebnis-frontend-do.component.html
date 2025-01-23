@@ -1,0 +1,152 @@
+<div>
+  <h2 id="page-heading" data-cy="WurfErgebnisHeading">
+    <span jhiTranslate="kegelclubApp.wurfErgebnis.home.title">Wurf Ergebnis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kegelclubApp.wurfErgebnis.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-wurf-ergebnis-frontend-do"
+        [routerLink]="['/wurf-ergebnis-frontend-do/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kegelclubApp.wurfErgebnis.home.createLabel">Wurf Ergebnis erstellen</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (wurfErgebnis().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kegelclubApp.wurfErgebnis.home.notFound">Keine Wurf Ergebnis gefunden</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="anzahlWuerfe">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.anzahlWuerfe">Anzahl Wuerfe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gesamtpunktzahl">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.gesamtpunktzahl">Gesamtpunktzahl</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pudel">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.pudel">Pudel</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="neuner">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.neuner">Neuner</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="kraenze">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.kraenze">Kraenze</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="kegler.id">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.kegler">Kegler</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="kegelclubtreffen.id">
+              <div class="d-flex">
+                <span jhiTranslate="kegelclubApp.wurfErgebnis.kegelclubtreffen">Kegelclubtreffen</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (wurfErgebnis of wurfErgebnis(); track trackId(wurfErgebnis)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/wurf-ergebnis-frontend-do', wurfErgebnis.id, 'view']">{{ wurfErgebnis.id }}</a>
+              </td>
+              <td>{{ wurfErgebnis.anzahlWuerfe }}</td>
+              <td>{{ wurfErgebnis.gesamtpunktzahl }}</td>
+              <td>{{ wurfErgebnis.pudel }}</td>
+              <td>{{ wurfErgebnis.neuner }}</td>
+              <td>{{ wurfErgebnis.kraenze }}</td>
+              <td>
+                @if (wurfErgebnis.kegler) {
+                  <div>
+                    <a [routerLink]="['/kegler-frontend-do', wurfErgebnis.kegler.id, 'view']">{{ wurfErgebnis.kegler.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (wurfErgebnis.kegelclubtreffen) {
+                  <div>
+                    <a [routerLink]="['/kegelclubtreffen-frontend-do', wurfErgebnis.kegelclubtreffen.id, 'view']">{{
+                      wurfErgebnis.kegelclubtreffen.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/wurf-ergebnis-frontend-do', wurfErgebnis.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/wurf-ergebnis-frontend-do', wurfErgebnis.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(wurfErgebnis)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

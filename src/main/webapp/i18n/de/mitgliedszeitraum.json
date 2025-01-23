@@ -1,0 +1,26 @@
+{
+  "kegelclubApp": {
+    "mitgliedszeitraum": {
+      "home": {
+        "title": "Mitgliedszeitraums",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Mitgliedszeitraum erstellen",
+        "createOrEditLabel": "Mitgliedszeitraum erstellen oder bearbeiten",
+        "notFound": "Keine Mitgliedszeitraums gefunden"
+      },
+      "created": "Mitgliedszeitraum erstellt mit ID {{ param }}",
+      "updated": "Mitgliedszeitraum aktualisiert mit ID {{ param }}",
+      "deleted": "Mitgliedszeitraum gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Mitgliedszeitraum {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Mitgliedszeitraum"
+      },
+      "id": "ID",
+      "startMitgliedschaft": "Start Mitgliedschaft",
+      "endeMitgliedschaft": "Ende Mitgliedschaft",
+      "kegler": "Kegler"
+    }
+  }
+}

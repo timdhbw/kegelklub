@@ -1,0 +1,205 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-wurf-ergebnis-frontend-do-heading"
+        data-cy="WurfErgebnisCreateUpdateHeading"
+        jhiTranslate="kegelclubApp.wurfErgebnis.home.createOrEditLabel"
+      >
+        Wurf Ergebnis erstellen oder bearbeiten
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kegelclubApp.wurfErgebnis.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let anzahlWuerfeRef = editForm.get('anzahlWuerfe')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_anzahlWuerfe" jhiTranslate="kegelclubApp.wurfErgebnis.anzahlWuerfe">Anzahl Wuerfe</label>
+          <input
+            type="number"
+            class="form-control"
+            name="anzahlWuerfe"
+            id="field_anzahlWuerfe"
+            data-cy="anzahlWuerfe"
+            formControlName="anzahlWuerfe"
+          />
+          @if (anzahlWuerfeRef.invalid && (anzahlWuerfeRef.dirty || anzahlWuerfeRef.touched)) {
+            <div>
+              @if (editForm.get('anzahlWuerfe')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('anzahlWuerfe')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Dieses Feld muss eine Zahl sein.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let gesamtpunktzahlRef = editForm.get('gesamtpunktzahl')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_gesamtpunktzahl" jhiTranslate="kegelclubApp.wurfErgebnis.gesamtpunktzahl"
+            >Gesamtpunktzahl</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="gesamtpunktzahl"
+            id="field_gesamtpunktzahl"
+            data-cy="gesamtpunktzahl"
+            formControlName="gesamtpunktzahl"
+          />
+          @if (gesamtpunktzahlRef.invalid && (gesamtpunktzahlRef.dirty || gesamtpunktzahlRef.touched)) {
+            <div>
+              @if (editForm.get('gesamtpunktzahl')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('gesamtpunktzahl')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Dieses Feld muss eine Zahl sein.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let pudelRef = editForm.get('pudel')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_pudel" jhiTranslate="kegelclubApp.wurfErgebnis.pudel">Pudel</label>
+          <input type="number" class="form-control" name="pudel" id="field_pudel" data-cy="pudel" formControlName="pudel" />
+          @if (pudelRef.invalid && (pudelRef.dirty || pudelRef.touched)) {
+            <div>
+              @if (editForm.get('pudel')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('pudel')?.errors?.number" jhiTranslate="entity.validation.number"
+                >Dieses Feld muss eine Zahl sein.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let neunerRef = editForm.get('neuner')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_neuner" jhiTranslate="kegelclubApp.wurfErgebnis.neuner">Neuner</label>
+          <input type="number" class="form-control" name="neuner" id="field_neuner" data-cy="neuner" formControlName="neuner" />
+          @if (neunerRef.invalid && (neunerRef.dirty || neunerRef.touched)) {
+            <div>
+              @if (editForm.get('neuner')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('neuner')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Dieses Feld muss eine Zahl sein.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let kraenzeRef = editForm.get('kraenze')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_kraenze" jhiTranslate="kegelclubApp.wurfErgebnis.kraenze">Kraenze</label>
+          <input type="number" class="form-control" name="kraenze" id="field_kraenze" data-cy="kraenze" formControlName="kraenze" />
+          @if (kraenzeRef.invalid && (kraenzeRef.dirty || kraenzeRef.touched)) {
+            <div>
+              @if (editForm.get('kraenze')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('kraenze')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Dieses Feld muss eine Zahl sein.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_kegler" jhiTranslate="kegelclubApp.wurfErgebnis.kegler">Kegler</label>
+          <select
+            class="form-control"
+            id="field_kegler"
+            data-cy="kegler"
+            name="kegler"
+            formControlName="kegler"
+            [compareWith]="compareKeglerFrontendDo"
+          >
+            @if (editForm.get(['kegler'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (keglerOption of keglersSharedCollection; track $index) {
+              <option [ngValue]="keglerOption">{{ keglerOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['kegler'])!.invalid && (editForm.get(['kegler'])!.dirty || editForm.get(['kegler'])!.touched)) {
+          <div>
+            @if (editForm.get(['kegler'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_kegelclubtreffen" jhiTranslate="kegelclubApp.wurfErgebnis.kegelclubtreffen"
+            >Kegelclubtreffen</label
+          >
+          <select
+            class="form-control"
+            id="field_kegelclubtreffen"
+            data-cy="kegelclubtreffen"
+            name="kegelclubtreffen"
+            formControlName="kegelclubtreffen"
+            [compareWith]="compareKegelclubtreffenFrontendDo"
+          >
+            @if (editForm.get(['kegelclubtreffen'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (kegelclubtreffenOption of kegelclubtreffensSharedCollection; track $index) {
+              <option [ngValue]="kegelclubtreffenOption">{{ kegelclubtreffenOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['kegelclubtreffen'])!.invalid &&
+          (editForm.get(['kegelclubtreffen'])!.dirty || editForm.get(['kegelclubtreffen'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['kegelclubtreffen'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Dieses Feld wird benötigt.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Abbrechen</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Speichern</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
