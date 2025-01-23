@@ -17,6 +17,11 @@ const routes: Routes = [
     outlet: 'navbar',
   },
   {
+    path: 'kegeltreffen',
+    loadComponent: () => import('./kegeltreffen/kegeltreffen.component'),
+    title: 'kegeltreffen.title',
+  },
+  {
     path: 'admin',
     data: {
       authorities: [Authority.ADMIN],
