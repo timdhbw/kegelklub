@@ -1,0 +1,24 @@
+type: object
+name: Kegelclubtreffen
+properties:
+  zeitpunkt:
+    type: string
+    format: date-time
+  dauer:
+    type: integer
+    format: int32
+    description: Dauer in Minuten
+  treffpunkt:
+    type: string
+  teilnehmer:
+    type: array
+    items:
+      $ref: 'kegler.yml'
+  ergebnisse:
+    type: array
+    items:
+      $ref: 'wurfergebnis.yml'
+  bilder:
+    type: array
+    items:
+      $ref: 'bild.yml'

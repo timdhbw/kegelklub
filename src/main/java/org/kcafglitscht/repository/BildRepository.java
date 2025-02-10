@@ -14,11 +14,11 @@ import reactor.core.publisher.Mono;
 @SuppressWarnings("unused")
 @Repository
 public interface BildRepository extends ReactiveCrudRepository<Bild, Long>, BildRepositoryInternal {
-    @Query("SELECT * FROM bild entity WHERE entity.treffen_id = :id")
-    Flux<Bild> findByTreffen(Long id);
+    @Query("SELECT * FROM bild entity WHERE entity.kegelclubtreffen_id = :id")
+    Flux<Bild> findByKegelclubtreffen(Long id);
 
-    @Query("SELECT * FROM bild entity WHERE entity.treffen_id IS NULL")
-    Flux<Bild> findAllWhereTreffenIsNull();
+    @Query("SELECT * FROM bild entity WHERE entity.kegelclubtreffen_id IS NULL")
+    Flux<Bild> findAllWhereKegelclubtreffenIsNull();
 
     @Override
     <S extends Bild> Mono<S> save(S entity);

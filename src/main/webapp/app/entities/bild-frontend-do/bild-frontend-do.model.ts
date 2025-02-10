@@ -8,7 +8,7 @@ export interface IBildFrontendDo {
   erstellung?: dayjs.Dayjs | null;
   bild?: string | null;
   bildContentType?: string | null;
-  treffen?: IKegelclubtreffenFrontendDo | null;
+  kegelclubtreffen?: IKegelclubtreffenFrontendDo | null;
 }
 
 export type NewBildFrontendDo = Omit<IBildFrontendDo, 'id'> & { id: null };

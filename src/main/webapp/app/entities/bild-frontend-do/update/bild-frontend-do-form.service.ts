@@ -36,7 +36,7 @@ type BildFrontendDoFormGroupContent = {
   erstellung: FormControl<BildFrontendDoFormRawValue['erstellung']>;
   bild: FormControl<BildFrontendDoFormRawValue['bild']>;
   bildContentType: FormControl<BildFrontendDoFormRawValue['bildContentType']>;
-  treffen: FormControl<BildFrontendDoFormRawValue['treffen']>;
+  kegelclubtreffen: FormControl<BildFrontendDoFormRawValue['kegelclubtreffen']>;
 };
 
 export type BildFrontendDoFormGroup = FormGroup<BildFrontendDoFormGroupContent>;
@@ -65,7 +65,7 @@ export class BildFrontendDoFormService {
         validators: [Validators.required],
       }),
       bildContentType: new FormControl(bildRawValue.bildContentType),
-      treffen: new FormControl(bildRawValue.treffen),
+      kegelclubtreffen: new FormControl(bildRawValue.kegelclubtreffen),
     });
   }
 

@@ -24,7 +24,7 @@ describe('BildFrontendDo Form Service', () => {
             typ: expect.any(Object),
             erstellung: expect.any(Object),
             bild: expect.any(Object),
-            treffen: expect.any(Object),
+            kegelclubtreffen: expect.any(Object),
           }),
         );
       });
@@ -39,7 +39,7 @@ describe('BildFrontendDo Form Service', () => {
             typ: expect.any(Object),
             erstellung: expect.any(Object),
             bild: expect.any(Object),
-            treffen: expect.any(Object),
+            kegelclubtreffen: expect.any(Object),
           }),
         );
       });

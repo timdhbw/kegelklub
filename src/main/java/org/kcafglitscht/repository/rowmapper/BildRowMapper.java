@@ -31,7 +31,7 @@ public class BildRowMapper implements BiFunction<Row, String, Bild> {
         entity.setErstellung(converter.fromRow(row, prefix + "_erstellung", Instant.class));
         entity.setBildContentType(converter.fromRow(row, prefix + "_bild_content_type", String.class));
         entity.setBild(converter.fromRow(row, prefix + "_bild", byte[].class));
-        entity.setTreffenId(converter.fromRow(row, prefix + "_treffen_id", Long.class));
+        entity.setKegelclubtreffenId(converter.fromRow(row, prefix + "_kegelclubtreffen_id", Long.class));
         return entity;
     }
 }

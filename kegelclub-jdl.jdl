@@ -32,10 +32,10 @@ entity WurfErgebnis {
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Kegelclubtreffen to Bild{treffen}
-    Kegler to Mitgliedszeitraum{kegler}
-    Kegler to WurfErgebnis{kegler required}
-    Kegelclubtreffen to WurfErgebnis{kegelclubtreffen required}
+	Kegelclubtreffen{bilder} to Bild{kegelclubtreffen}
+    Kegler{mitgliedszeitraum} to Mitgliedszeitraum{kegler}
+    Kegler{wurfErgebnis} to WurfErgebnis{kegler required}
+    Kegelclubtreffen{wurfErgebnis} to WurfErgebnis{kegelclubtreffen required}
 }
 
 // Set service options to all except few

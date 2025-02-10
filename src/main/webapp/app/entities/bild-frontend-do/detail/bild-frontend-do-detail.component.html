@@ -38,11 +38,13 @@
               </div>
             }
           </dd>
-          <dt><span jhiTranslate="kegelclubApp.bild.treffen">Treffen</span></dt>
+          <dt><span jhiTranslate="kegelclubApp.bild.kegelclubtreffen">Kegelclubtreffen</span></dt>
           <dd>
-            @if (bild()!.treffen) {
+            @if (bild()!.kegelclubtreffen) {
               <div>
-                <a [routerLink]="['/kegelclubtreffen-frontend-do', bild()!.treffen?.id, 'view']">{{ bildRef.treffen?.id }}</a>
+                <a [routerLink]="['/kegelclubtreffen-frontend-do', bild()!.kegelclubtreffen?.id, 'view']">{{
+                  bildRef.kegelclubtreffen?.id
+                }}</a>
               </div>
             }
           </dd>

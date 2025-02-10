@@ -28,7 +28,8 @@
   "relationships": [
     {
       "otherEntityName": "kegelclubtreffen",
-      "relationshipName": "treffen",
+      "otherEntityRelationshipName": "bilder",
+      "relationshipName": "kegelclubtreffen",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

@@ -39,7 +39,7 @@ class BildRepositoryInternalImpl extends SimpleR2dbcRepository<Bild, Long> imple
     private final BildRowMapper bildMapper;
 
     private static final Table entityTable = Table.aliased("bild", EntityManager.ENTITY_ALIAS);
-    private static final Table treffenTable = Table.aliased("kegelclubtreffen", "treffen");
+    private static final Table kegelclubtreffenTable = Table.aliased("kegelclubtreffen", "kegelclubtreffen");
 
     public BildRepositoryInternalImpl(
         R2dbcEntityTemplate template,
@@ -68,13 +68,13 @@ class BildRepositoryInternalImpl extends SimpleR2dbcRepository<Bild, Long> imple
 
     RowsFetchSpec<Bild> createQuery(Pageable pageable, Condition whereClause) {
         List<Expression> columns = BildSqlHelper.getColumns(entityTable, EntityManager.ENTITY_ALIAS);
-        columns.addAll(KegelclubtreffenSqlHelper.getColumns(treffenTable, "treffen"));
+        columns.addAll(KegelclubtreffenSqlHelper.getColumns(kegelclubtreffenTable, "kegelclubtreffen"));
         SelectFromAndJoinCondition selectFrom = Select.builder()
             .select(columns)
             .from(entityTable)
-            .leftOuterJoin(treffenTable)
-            .on(Column.create("treffen_id", entityTable))
-            .equals(Column.create("id", treffenTable));
+            .leftOuterJoin(kegelclubtreffenTable)
+            .on(Column.create("kegelclubtreffen_id", entityTable))
+            .equals(Column.create("id", kegelclubtreffenTable));
         // we do not support Criteria here for now as of https://github.com/jhipster/generator-jhipster/issues/18269
         String select = entityManager.createSelect(selectFrom, Bild.class, pageable, whereClause);
         return db.sql(select).map(this::process);
@@ -93,7 +93,7 @@ class BildRepositoryInternalImpl extends SimpleR2dbcRepository<Bild, Long> imple
 
     private Bild process(Row row, RowMetadata metadata) {
         Bild entity = bildMapper.apply(row, "e");
-        entity.setTreffen(kegelclubtreffenMapper.apply(row, "treffen"));
+        entity.setKegelclubtreffen(kegelclubtreffenMapper.apply(row, "kegelclubtreffen"));
         return entity;
     }
 

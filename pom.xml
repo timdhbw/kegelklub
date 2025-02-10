@@ -83,6 +83,7 @@
         <spring.profiles.active>dev</spring.profiles.active>
         <springdoc-openapi-starter-webflux-api.version>2.7.0</springdoc-openapi-starter-webflux-api.version>
         <testng.version>7.10.2</testng.version>
+        <openapi-generator-maven-plugin.version>7.10.0</openapi-generator-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -395,6 +396,10 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+              <groupId>org.openapitools</groupId>
+              <artifactId>openapi-generator-maven-plugin</artifactId>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -852,6 +857,51 @@
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar-maven-plugin.version}</version>
                 </plugin>
+                <plugin>
+                <!--
+                    Plugin that provides API-first development using openapi-generator to
+                    generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
+                -->
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-maven-plugin.version}</version>
+                <!--                    <configuration>-->
+                <!--                        <skipValidateSpec>true</skipValidateSpec>-->
+                <!--                    </configuration>-->
+                <executions>
+                  <execution>
+                    <id>backend</id>
+                    <goals>
+                      <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                      <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
+                      <output>${project.basedir}/target/generated-sources/annotations</output>
+                      <generatorName>spring</generatorName>
+                      <apiPackage>de.master.lernprogramm.web.api</apiPackage>
+                      <modelPackage>de.master.lernprogramm.web.api.dtos</modelPackage>
+                      <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                      <importMappings>Problem=org.zalando.problem.Problem</importMappings>
+                      <modelNameSuffix>UiDto</modelNameSuffix>
+                      <configOptions>
+                        <delegatePattern>true</delegatePattern>
+                        <title>lernprogramm</title>
+                      </configOptions>
+                    </configuration>
+                  </execution>
+                  <execution>
+                    <id>angular</id>
+                    <goals>
+                      <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                      <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
+                      <generatorName>typescript-angular</generatorName>
+                      <modelNameSuffix>UiDto</modelNameSuffix>
+                    </configuration>
+                  </execution>
+                </executions>
+              </plugin>
             </plugins>
         </pluginManagement>
     </build>

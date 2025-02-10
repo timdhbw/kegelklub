@@ -49,12 +49,12 @@ describe('BildFrontendDo Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call KegelclubtreffenFrontendDo query and add missing value', () => {
       const bild: IBildFrontendDo = { id: 9596 };
-      const treffen: IKegelclubtreffenFrontendDo = { id: 21216 };
-      bild.treffen = treffen;
+      const kegelclubtreffen: IKegelclubtreffenFrontendDo = { id: 21216 };
+      bild.kegelclubtreffen = kegelclubtreffen;
 
       const kegelclubtreffenCollection: IKegelclubtreffenFrontendDo[] = [{ id: 21216 }];
       jest.spyOn(kegelclubtreffenService, 'query').mockReturnValue(of(new HttpResponse({ body: kegelclubtreffenCollection })));
-      const additionalKegelclubtreffenFrontendDos = [treffen];
+      const additionalKegelclubtreffenFrontendDos = [kegelclubtreffen];
       const expectedCollection: IKegelclubtreffenFrontendDo[] = [...additionalKegelclubtreffenFrontendDos, ...kegelclubtreffenCollection];
       jest.spyOn(kegelclubtreffenService, 'addKegelclubtreffenFrontendDoToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -71,13 +71,13 @@ describe('BildFrontendDo Management Update Component', () => {
 
     it('Should update editForm', () => {
       const bild: IBildFrontendDo = { id: 9596 };
-      const treffen: IKegelclubtreffenFrontendDo = { id: 21216 };
-      bild.treffen = treffen;
+      const kegelclubtreffen: IKegelclubtreffenFrontendDo = { id: 21216 };
+      bild.kegelclubtreffen = kegelclubtreffen;
 
       activatedRoute.data = of({ bild });
       comp.ngOnInit();
 
-      expect(comp.kegelclubtreffensSharedCollection).toContainEqual(treffen);
+      expect(comp.kegelclubtreffensSharedCollection).toContainEqual(kegelclubtreffen);
       expect(comp.bild).toEqual(bild);
     });
   });

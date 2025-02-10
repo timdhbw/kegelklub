@@ -1,0 +1,22 @@
+type: object
+name: Wurfergebnis
+properties:
+  anzahlWuerfe:
+    type: integer
+    format: int32
+  gesamtpunktzahl:
+    type: integer
+    format: int32
+  pudel:
+    type: integer
+    format: int32
+  neuner:
+    type: integer
+    format: int32
+  kraenze:
+    type: integer
+    format: int32
+  kegler:
+    type: object
+    schema:
+      $ref: 'kegler.yml'

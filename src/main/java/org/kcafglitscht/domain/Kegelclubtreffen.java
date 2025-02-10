@@ -35,8 +35,8 @@ public class Kegelclubtreffen implements Serializable {
     private String treffpunkt;
 
     @org.springframework.data.annotation.Transient
-    @JsonIgnoreProperties(value = { "treffen" }, allowSetters = true)
-    private Set<Bild> bilds = new HashSet<>();
+    @JsonIgnoreProperties(value = { "kegelclubtreffen" }, allowSetters = true)
+    private Set<Bild> bilders = new HashSet<>();
 
     @org.springframework.data.annotation.Transient
     @JsonIgnoreProperties(value = { "kegler", "kegelclubtreffen" }, allowSetters = true)
@@ -96,34 +96,34 @@ public class Kegelclubtreffen implements Serializable {
         this.treffpunkt = treffpunkt;
     }
 
-    public Set<Bild> getBilds() {
-        return this.bilds;
+    public Set<Bild> getBilders() {
+        return this.bilders;
     }
 
-    public void setBilds(Set<Bild> bilds) {
-        if (this.bilds != null) {
-            this.bilds.forEach(i -> i.setTreffen(null));
+    public void setBilders(Set<Bild> bilds) {
+        if (this.bilders != null) {
+            this.bilders.forEach(i -> i.setKegelclubtreffen(null));
         }
         if (bilds != null) {
-            bilds.forEach(i -> i.setTreffen(this));
+            bilds.forEach(i -> i.setKegelclubtreffen(this));
         }
-        this.bilds = bilds;
+        this.bilders = bilds;
     }
 
-    public Kegelclubtreffen bilds(Set<Bild> bilds) {
-        this.setBilds(bilds);
+    public Kegelclubtreffen bilders(Set<Bild> bilds) {
+        this.setBilders(bilds);
         return this;
     }
 
-    public Kegelclubtreffen addBild(Bild bild) {
-        this.bilds.add(bild);
-        bild.setTreffen(this);
+    public Kegelclubtreffen addBilder(Bild bild) {
+        this.bilders.add(bild);
+        bild.setKegelclubtreffen(this);
         return this;
     }
 
-    public Kegelclubtreffen removeBild(Bild bild) {
-        this.bilds.remove(bild);
-        bild.setTreffen(null);
+    public Kegelclubtreffen removeBilder(Bild bild) {
+        this.bilders.remove(bild);
+        bild.setKegelclubtreffen(null);
         return this;
     }
 

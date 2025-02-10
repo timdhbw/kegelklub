@@ -117,7 +117,7 @@ export class BildFrontendDoUpdateComponent implements OnInit {
     this.kegelclubtreffensSharedCollection =
       this.kegelclubtreffenService.addKegelclubtreffenFrontendDoToCollectionIfMissing<IKegelclubtreffenFrontendDo>(
         this.kegelclubtreffensSharedCollection,
-        bild.treffen,
+        bild.kegelclubtreffen,
       );
   }
 
@@ -129,7 +129,7 @@ export class BildFrontendDoUpdateComponent implements OnInit {
         map((kegelclubtreffens: IKegelclubtreffenFrontendDo[]) =>
           this.kegelclubtreffenService.addKegelclubtreffenFrontendDoToCollectionIfMissing<IKegelclubtreffenFrontendDo>(
             kegelclubtreffens,
-            this.bild?.treffen,
+            this.bild?.kegelclubtreffen,
           ),
         ),
       )

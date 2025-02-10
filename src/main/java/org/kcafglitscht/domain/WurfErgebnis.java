@@ -45,7 +45,7 @@ public class WurfErgebnis implements Serializable {
     private Kegler kegler;
 
     @org.springframework.data.annotation.Transient
-    @JsonIgnoreProperties(value = { "bilds", "wurfErgebnis" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "bilders", "wurfErgebnis" }, allowSetters = true)
     private Kegelclubtreffen kegelclubtreffen;
 
     @Column("kegler_id")

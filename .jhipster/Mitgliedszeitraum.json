@@ -19,6 +19,7 @@
   "relationships": [
     {
       "otherEntityName": "kegler",
+      "otherEntityRelationshipName": "mitgliedszeitraum",
       "relationshipName": "kegler",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"

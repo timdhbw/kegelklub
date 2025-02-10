@@ -1,0 +1,10 @@
+type: object
+name: Bild
+properties:
+  bildbeschreibung:
+    type: string
+  typ:
+    type: string
+  erstlleung:
+    type: string
+    format: date-time

@@ -1,0 +1,9 @@
+type: object
+name: Mitgliedszeitraum
+properties:
+  start:
+    type: string
+    format: date
+  ende:
+    type: string
+    format: date

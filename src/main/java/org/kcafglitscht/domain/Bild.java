@@ -39,11 +39,11 @@ public class Bild implements Serializable {
     private String bildContentType;
 
     @org.springframework.data.annotation.Transient
-    @JsonIgnoreProperties(value = { "bilds", "wurfErgebnis" }, allowSetters = true)
-    private Kegelclubtreffen treffen;
+    @JsonIgnoreProperties(value = { "bilders", "wurfErgebnis" }, allowSetters = true)
+    private Kegelclubtreffen kegelclubtreffen;
 
-    @Column("treffen_id")
-    private Long treffenId;
+    @Column("kegelclubtreffen_id")
+    private Long kegelclubtreffenId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -125,26 +125,26 @@ public class Bild implements Serializable {
         this.bildContentType = bildContentType;
     }
 
-    public Kegelclubtreffen getTreffen() {
-        return this.treffen;
+    public Kegelclubtreffen getKegelclubtreffen() {
+        return this.kegelclubtreffen;
     }
 
-    public void setTreffen(Kegelclubtreffen kegelclubtreffen) {
-        this.treffen = kegelclubtreffen;
-        this.treffenId = kegelclubtreffen != null ? kegelclubtreffen.getId() : null;
+    public void setKegelclubtreffen(Kegelclubtreffen kegelclubtreffen) {
+        this.kegelclubtreffen = kegelclubtreffen;
+        this.kegelclubtreffenId = kegelclubtreffen != null ? kegelclubtreffen.getId() : null;
     }
 
-    public Bild treffen(Kegelclubtreffen kegelclubtreffen) {
-        this.setTreffen(kegelclubtreffen);
+    public Bild kegelclubtreffen(Kegelclubtreffen kegelclubtreffen) {
+        this.setKegelclubtreffen(kegelclubtreffen);
         return this;
     }
 
-    public Long getTreffenId() {
-        return this.treffenId;
+    public Long getKegelclubtreffenId() {
+        return this.kegelclubtreffenId;
     }
 
-    public void setTreffenId(Long kegelclubtreffen) {
-        this.treffenId = kegelclubtreffen;
+    public void setKegelclubtreffenId(Long kegelclubtreffen) {
+        this.kegelclubtreffenId = kegelclubtreffen;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -17,7 +17,7 @@ public class BildSqlHelper {
         columns.add(Column.aliased("bild", table, columnPrefix + "_bild"));
         columns.add(Column.aliased("bild_content_type", table, columnPrefix + "_bild_content_type"));
 
-        columns.add(Column.aliased("treffen_id", table, columnPrefix + "_treffen_id"));
+        columns.add(Column.aliased("kegelclubtreffen_id", table, columnPrefix + "_kegelclubtreffen_id"));
         return columns;
     }
 }

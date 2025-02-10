@@ -68,9 +68,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="treffen.id">
+            <th scope="col" jhiSortBy="kegelclubtreffen.id">
               <div class="d-flex">
-                <span jhiTranslate="kegelclubApp.bild.treffen">Treffen</span>
+                <span jhiTranslate="kegelclubApp.bild.kegelclubtreffen">Kegelclubtreffen</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -95,9 +95,9 @@
                 }
               </td>
               <td>
-                @if (bild.treffen) {
+                @if (bild.kegelclubtreffen) {
                   <div>
-                    <a [routerLink]="['/kegelclubtreffen-frontend-do', bild.treffen.id, 'view']">{{ bild.treffen.id }}</a>
+                    <a [routerLink]="['/kegelclubtreffen-frontend-do', bild.kegelclubtreffen.id, 'view']">{{ bild.kegelclubtreffen.id }}</a>
                   </div>
                 }
               </td>

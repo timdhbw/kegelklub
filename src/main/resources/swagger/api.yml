@@ -1,0 +1,266 @@
+# API-first development with OpenAPI
+# This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
+openapi: '3.0.3'
+info:
+  title: 'kegelclub'
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api
+    description: Development server
+  - url: https://localhost:8080/api
+    description: Development server with TLS Profile
+paths:
+  /frontend/kegelclubtreffen:
+    get:
+      tags:
+        - frontend
+      description: erhalte Kegelclubtreffen
+      operationId: getProfil
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Alle Kegelclubtreffen
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'schemas/kegelclubtreffen.yml'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - frontend
+      description: Speicher eine neues Profil
+      operationId: saveProfil
+      requestBody:
+        description: Zu speicherndes Profil
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'schemas/mitgliedszeitraum.yml'
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf saveProfil
+          content:
+            application/json:
+              schema:
+                $ref: 'schemas/mitgliedszeitraum.yml'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /frontend/aufgabe:
+    get:
+      tags:
+        - frontend
+      description: Bekomme eine Aufgabe für die entsprechende Id
+      operationId: getAufgabeById
+      parameters:
+        - in: query
+          name: aufgabeId
+          description: AufgabenId der Aufgabe, die geholt werden soll
+          schema:
+            type: integer
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf getAufgabeById
+          content:
+            application/json:
+              schema:
+                $ref: 'schemas/kegelclubtreffen.yml'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - frontend
+      description: Speicher die Aufgabe
+      operationId: saveAufgabe
+      requestBody:
+        description: Zu speichernde Aufgabe
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'schemas/kegelclubtreffen.yml'
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf getAufgabeById
+          content:
+            application/json:
+              schema:
+                $ref: 'schemas/kegelclubtreffen.yml'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /frontend/aufgabe/user:
+    get:
+      tags:
+        - frontend
+      description: Bekomme eine Aufgabe für die entsprechende Id
+      operationId: getAufgabenByUserId
+      parameters:
+        - in: query
+          name: userId
+          description: UserId der Aufgabe, die geholt werden soll
+          schema:
+            type: string
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf getAufgabenByUserId
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'schemas/kegelclubtreffen.yml'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /frontend/aufgabe/tags:
+    get:
+      tags:
+        - frontend
+      description: Bekomme alle existierenden AufgabenTags
+      operationId: getExistingTagList
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf getExistingTagList
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'schemas/wurfergebnis.yml'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /frontend/aufgabe/getRandom:
+    post:
+      tags:
+        - frontend
+      description: Bekomme die AufgabeId für die nächste Aufgabe
+      operationId: getRandomNextAufgabe
+      requestBody:
+        description: Vom User gewählte aufgabentags
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'schemas/wurfergebnis.yml'
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf getRandomNextAufgabe
+          content:
+            application/json:
+              schema:
+                type: string
+        '204':
+          description: Keine Aufgabe gefunden
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /frontend/aufgabe/abschluss:
+    post:
+      tags:
+        - frontend
+      description: Aufruf, nachdem der User eine Aufgabe abgeschlossen hat
+      operationId: aufgabenAbschluss
+      requestBody:
+        description: Vom User Abgeschlossene Aufgabe
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'schemas/kegelclubtreffen.yml'
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Antwort auf aufgabenAbschluss
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ergenisUser:
+                    type: number
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  responses:
+    Problem:
+      description: error occurred - see status code and problem object for more information.
+      content:
+        'application/problem+json':
+          schema:
+            $ref: 'https://opensource.zalando.com/problem/schema.yaml#/Problem'
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+
+  securitySchemes:
+    jwt:
+      type: http
+      description: JWT Authentication
+      scheme: bearer
+      bearerFormat: JWT
+    basic:
+      type: http
+      description: Basic Authentication
+      scheme: basic
+security:
+  - jwt: []
+  - basic: []

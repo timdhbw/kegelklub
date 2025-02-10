@@ -1,0 +1,9 @@
+type: object
+name: Kegler
+properties:
+  name:
+    type: string
+  mitgliedszeitraeume:
+    type: array
+    items:
+      $ref: 'mitgliedszeitraum.yml'
